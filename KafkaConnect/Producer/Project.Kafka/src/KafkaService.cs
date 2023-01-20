@@ -24,7 +24,6 @@ namespace Project.Kafka.src
                 LingerMs = _kafkaOptions.LingerMs,
                 EnableDeliveryReports = _kafkaOptions.EnableDeliveryReports,
                 SecurityProtocol = _kafkaOptions.Protocol,
-                EnableSaslOauthbearerUnsecureJwt = true
             };
             var producer = new ProducerBuilder<string, string>(clientProducerConfig).Build();
             return producer;
@@ -35,7 +34,7 @@ namespace Project.Kafka.src
             try
             {
                 Producer = GetClientKafka();
-                await Producer.ProduceAsync(topic, new Message<string, string> { Key = key, Value = value });
+                Producer.Produce(topic, new Message<string, string> { Key = key, Value = value });
                 Producer.Flush();
             }
             catch (Exception)
@@ -44,7 +43,7 @@ namespace Project.Kafka.src
             }
             finally
             {
-                Producer!.Dispose();
+                Producer.Dispose();
             }
         }
     }

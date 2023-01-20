@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped(typeof(IServices<>), typeof(Services<>));
-builder.Services.AddScoped<IKafkaService, KafkaService>();
+builder.Services.AddSingleton(typeof(IServices<>), typeof(Services<>));
+builder.Services.AddSingleton<IKafkaService, KafkaService>();
 builder.Services.Configure<KafkaOptions>(builder.Configuration.GetSection(nameof(KafkaOptions)));
-builder.Services.AddScoped<IKafkaOptions>(opt => opt.GetRequiredService<IOptions<KafkaOptions>>().Value);
+builder.Services.AddSingleton<IKafkaOptions>(opt => opt.GetRequiredService<IOptions<KafkaOptions>>().Value);
 
 var app = builder.Build();
 app.UseSwagger();

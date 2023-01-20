@@ -19,7 +19,7 @@ namespace ProducerApi.src.Controllers
         public async Task<IActionResult> Post(Participants participant)
         {
             var vote = new Vote { Participants = participant };
-            return Ok(_service.Create(vote));
+            return _service.Create(vote).IsCompletedSuccessfully ? Ok("Send Success") : BadRequest("Error");
         }
     }
 }

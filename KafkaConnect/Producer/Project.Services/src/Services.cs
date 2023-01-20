@@ -16,8 +16,8 @@ namespace Project.Services.src
 
         public async Task Create(T entity)
         {
-            var entityJson = JsonSerializer.Serialize(entity);
-            await Task.Run(() => _kafkaSvc.Send(_kafkaOptions.Topic, null, entityJson));
+            string entityJson = JsonSerializer.Serialize(entity);
+            await _kafkaSvc.Send(_kafkaOptions.Topic, null, entityJson);
         }
     }
 }
