@@ -1,0 +1,17 @@
+{
+    "name": "votes-connector-v1",
+    "config": {
+        "tasks.max": 1,
+        "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+        "database.hostname": "10.0.0.142",
+        "database.port": "1433",
+        "database.user": "sa",
+        "database.password": "Bella2709",
+        "database.encrypt": false,
+        "database.names": "ProjectVoteDb",
+        "topic.prefix": "cdc.topic",
+        "table.include.list": "dbo.Votes",
+        "schema.history.internal.kafka.bootstrap.servers": "PLAINTEXT://10.0.0.142:9092",
+        "schema.history.internal.kafka.topic": "votes"
+    }
+}

@@ -1,0 +1,24 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY ["Producer.sln", "ProducerApi/"]
+COPY ["ProducerApi/ProducerApi.csproj", "ProducerApi/"]
+RUN dotnet restore "ProducerApi/ProducerApi.csproj"
+COPY . .
+WORKDIR "/src/ProducerApi"
+RUN dotnet build "ProducerApi.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "ProducerApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+RUN apt update && apt install telnet -y
+ENTRYPOINT ["dotnet", "ProducerApi.dll"]

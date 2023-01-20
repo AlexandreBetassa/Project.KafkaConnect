@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    hostname: zookeeper
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.142:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+  connect:
+    image: connect-sqlserver
+    container_name: kafka-connect
+    depends_on:
+      - kafka
+    ports:
+      - 8083:8083
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: PLAINTEXT://10.0.0.142:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: cdc.connect-votes
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-1-config
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-1-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: connect-1-status
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_OFFSET.STORAGE.REPLICATION.FACTOR: 1
+      CONNECT_CONFIG.STORAGE.REPLICATION.FACTOR: 1
+      CONNECT_OFFSET.STORAGE.PARTITIONS: 1
+      CONNECT_STATUS.STORAGE.REPLICATION.FACTOR: 1
+      CONNECT_STATUS.STORAGE.PARTITIONS: 1
+      CONNECT_REST_ADVERTISED_HOST_NAME: 10.0.0.142
+  producer:
+    image: producer-votes:latest
+    container_name: producer
+    ports:
+      - 8000:80
+    depends_on:
+      - kafka
+  consumer:
+    image: consumer-votes:latest
+    container_name: consumer
+    ports:
+      - 8001:80
