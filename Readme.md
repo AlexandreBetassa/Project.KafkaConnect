@@ -32,7 +32,7 @@ Abra um terminal, vá até a pasta `Consumer` onde está localizado o arquivo `V
 Este comando fará com que uma imagem da API consumidora de dados seja criada e assim possível de ser executada no quando subirmos o docker compose.
 
 ### KafkaConnect
-Abra um terminal, vá até a pasta `Docker`e execute o seguinte comando:
+Abra um terminal, vá até a pasta `Docker` e execute o seguinte comando:
 
     docker build . -t connect-sqlserver:latest
 
@@ -88,15 +88,24 @@ Esta query irá indicar para o CDC qual tabela capturar as alterações. Após a
 Com isso encerramos a configuração em nosso banco de dados.
 
 ## Plugin Debezium Sql-Server
-Para conectarmos o Debezium no nosso banco de dados, necessitamos criar o conector e enviá-lo para o kafka-connect. Para isso inicie um terminal do Ubuntu, navegue até a pasta onde esta armazenado o arquivo `debeziumsql.json`e execute o seguinte comando:
+Para conectarmos o Debezium no nosso banco de dados, necessitamos criar o conector e enviá-lo para o kafka-connect. Para isso inicie um terminal do Ubuntu, navegue até a pasta onde esta armazenado o arquivo `debeziumsql.json` e execute o seguinte comando:
 
     curl -X POST -H "Content-Type: application/json" --data @debeziumsql.json http://localhost:8083/connectors
 
-Este comando efetua um POST de um arquivo com extensão `.json`com as configurações básicas necessárias para o Debezium se conectar ao nosso banco de dados e exportar todas as configurações para um tópico Kafka chamado de: `cdc.topic.ProjectVoteDb.dbo.Votes`.
+Este comando efetua um POST de um arquivo com extensão `.json` com as configurações básicas necessárias para o Debezium se conectar ao nosso banco de dados e exportar todas as configurações para um tópico Kafka chamado de: `cdc.topic.ProjectVoteDb.dbo.Votes`.
 
 ## Envio de dados
 Abra seu navegador de internet e digite:
 
     http://localhost:8000/swagger/index.html
 
-Abrirá o swagger para enviarmos dados para o nosso tópico Votes existente no Kafka. Não criamos ele manualmente, pois nossa API de Produção de dados já se encarrega de criar esse tópico para nós, com valores `default`com um tópico ou  `topic`com o nome de `votes`, uma partição ou `partitions`e também com o fator de replicação ou `replication-factor`da nossa mensagem pelo `broker`de um.
+Abrirá o swagger para enviarmos dados para o nosso tópico Votes existente no Kafka. Não criamos ele manualmente, pois quando enviamos uma mensagem para o Kafka e o tópico informado não exista, por padrão o serviço Kafka o cria, nesse com valores `default`, configurados no compose que são:
+- 1 partição ou `partitions`;
+- fator de replicação ou `replication-factor` da nossa mensagem pelo `broker` de 1;
+- Nome do tópico ou `tópic` neste caso foi informado no appsettings.json da aplicação com o nome de: `Votes`.
+
+Execute o Post escolhendo um valor na lista do endpoint. Quando clicar em executar ele enviará uma mensagem para o Broker Kafka que armazenará em um tópico. Nossa API de consumo esta com uma configuração para efetuar o consumo das informações enviadas a cada um segundo. Ou seja, a cada 1 segunda nossa API de consumo irá lá no tópico Kafka chamado `Votes` verificará se existem offsets não lidos. Caso houver ela pegará as informações contidas no offset lida naquele momento e a enviará para gravação no banco de dados do SQLServer. Caso haja sucesso na gravação, ele irá efetuar um `commit`naquele offset lido para que no próximo ciclo de consumo ele pegue uma nova informação. 
+Ao gravar na nossa tabela `Votes`no banco de dados, por ela estar sendo monitorada pelo CDC `Change-Data-Capture`, essas informações serão replicadas para a tabela `cdc.dbo_Votes_CT`, esses `logs` serão exportados para um outro tópico Kafka com nome `cdc.topic.ProjectVoteDb.dbo.Votes` que poderá ser lida por outra aplicação caso desejar.
+
+## Em Desenvolvimento
+---- LEITURA DO TÓPICO `cdc.topic.ProjectVoteDb.dbo.Votes`----
