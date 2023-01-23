@@ -1,4 +1,5 @@
-# POC.KakfaConnect - .Net7 - EM DESENVOLVIMENTO
+# POC.KakfaConnect - .Net 7 
+## - EM DESENVOLVIMENTO
 
 Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Api de produtor de informações (Votos)
@@ -41,3 +42,17 @@ Com os serviços configurados e as imagens criadas localmente, podemos então ex
     docker compose up -d
 
 Este comando fará com que todos os serviços necessários entrem e execução. Este processo demora cerca de 1 a 2 minutos normalmente para estar concluido e todos os serviços comunicando entre si.
+
+## Habilitando CDC no Banco de Dados SQL Server:
+
+Como aqui o objetivo aqui é somente demonstrar uma maneira de colocar o projeto em execução, não explicaremos o que seria o CDC, porém vou colocar um link de documentação para consulta, logo abaixo:
+
+    https://learn.microsoft.com/pt-br/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16
+
+Para habilitá-lo você pode efetuar da seguinte maneira:
+
+    - Abra o SQL Server Management Studio, e digite as credenciais que estão na imagem abaixo: 
+
+![Login SMST](img\loginsql.png)
+
+
