@@ -58,13 +58,27 @@ Para habilitá-lo executaremos um passo a passo, desde a criação do banco de d
 - Abra uma nova consulta e coloque o script abaixo:
 
 ```script
-
 CREATE DATABASE ProjectVoteDb;
 CREATE TABLE dbo.Votes(
 	Id int IDENTITY(1,1) NOT NULL,
 	participants int NOT NULL,
 	Qtd int NOT NULL,
-)
-
 ```
+Com a tabela e o banco de dados criado podemos habilitar o CDC do seguinte modo:
 
+```script
+    EXEC sys.cdc_enable_db;
+```
+Esse comando executará um procedimento armazenado no SQL Server que irá habilitar o CDC para nosso banco de dados, porém ainda precisaremos informar em qual tabela iremos efetuar as capturas. Para isso execute o seguinte script no Sql:
+
+```script
+    USE ProjectVoteDb;  
+    EXEC sys.sp_cdc_enable_table  
+    @source_schema = N'dbo',  
+    @source_name   = N'Votes',  
+    @role_name     = NULL,  
+    @supports_net_changes = 1  
+```
+Esta query irá indicar para o CDC qual tabela capturar as alterações. Após alguns instantes, depois que a consulta for completada, examine se a sua estrutura ficou assim:
+
+![TablesSql](./img/TablesSQL.png)
