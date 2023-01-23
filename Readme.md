@@ -1,4 +1,5 @@
 # POC.KakfaConnect - .Net7
+- EM DESENVOLVIMENTO
 
 Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Api de produtor de informações (Votos)
@@ -20,9 +21,17 @@ Efetuado a instalação do serviço de container em sua máquina. Vá até a pas
     docker build . -t producer-votes:latest
 
 Este comando fará com que uma imagem da API produtora de dados seja criada e assim possível de ser executada no quando subirmos o docker compose.
+
 ### Consumer
 Vá até a pasta `Consumer` onde está localizado o arquivo `Votes.sln` e execute o seguinte comando:
 
     docker build . -t consumer-votes:latest
 
 Este comando fará com que uma imagem da API consumidora de dados seja criada e assim possível de ser executada no quando subirmos o docker compose.
+
+### KafkaConnect
+Vá até a pasta `Docker`e execute o seguinte comando:
+
+    docker build . -t connect-sqlserver:latest
+
+Este comando criará uma imagem que criará uma imagem do KafkaConnect com um plugin do Debézium para mais tarde, monitorar o banco de dados das alterações efetuada na tabela que configurarmos.
