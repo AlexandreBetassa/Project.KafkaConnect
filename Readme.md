@@ -16,6 +16,7 @@ Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
 
 Efetuado a instalação do serviço de container em sua máquina. Vá até a pasta "Producer" onde está o arquivo Produce.sln e execute o seguinte comando:
 
-docker build . -t producer-votes:latest
-
+    ```
+    docker build . -t producer-votes:latest
+    ```
 
