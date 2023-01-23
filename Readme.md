@@ -1,6 +1,6 @@
 # POC.KakfaConnect - .Net7
 
-Este projeto é um projeto de estudo para se trabalhar com o KafkaConnect. Onde possui:
+Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Api de produtor de informações (Votos)
  - 1 Api de consumidor das informações geradas (Votos)
  - 1 Api KafkaConnect
@@ -11,7 +11,8 @@ Este projeto é um projeto de estudo para se trabalhar com o KafkaConnect. Onde 
 
  ## Como executá-lo
     Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máquina. Para mais detalhes consulte: 
-
+´´´ 
     https://github.com/codeedu/wsl2-docker-quickstart#integrar-docker-com-wsl-2
+´´´
 
-    
+
