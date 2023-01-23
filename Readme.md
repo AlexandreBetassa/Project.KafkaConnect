@@ -53,6 +53,6 @@ Para habilitá-lo você pode efetuar da seguinte maneira:
 
     - Abra o SQL Server Management Studio, e digite as credenciais que estão na imagem abaixo: 
 
-![Login SMST](img\loginsql.png)
+!(img\loginsql.png)
 
 
