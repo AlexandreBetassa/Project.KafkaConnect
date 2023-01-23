@@ -51,7 +51,7 @@ Como aqui o objetivo aqui é somente demonstrar uma maneira de colocar o projeto
 
 Para habilitá-lo você pode efetuar da seguinte maneira:
 
-    - Abra o SQL Server Management Studio, e digite as credenciais que estão na imagem abaixo: 
+- Abra o SQL Server Management Studio, e digite as credenciais que estão na imagem abaixo: 
 
 ![SqlServerLogin](./img/loginsql.png)
 
