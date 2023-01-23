@@ -92,7 +92,7 @@ Para conectarmos o Debezium no nosso banco de dados, necessitamos criar o conect
 
     curl -X POST -H "Content-Type: application/json" --data @debeziumsql.json http://localhost:8083/connectors
 
-Este comando efetua um POST de um arquivo com extensão `.json` com as configurações básicas necessárias para o Debezium se conectar ao nosso banco de dados e exportar todas as configurações para um tópico Kafka chamado de: `cdc.topic.ProjectVoteDb.dbo.Votes`.
+Este comando efetua um POST de um arquivo com extensão `.json` com as configurações básicas necessárias para o Debezium se conectar ao nosso banco de dados e exportar todas as configurações para um tópico Kafka chamado de: `cdc.topic.ProjectVoteDb.dbo.Votes` através do KafkaConnect.
 
 ## Envio de dados
 Abra seu navegador de internet e digite:
@@ -107,5 +107,28 @@ Abrirá o swagger para enviarmos dados para o nosso tópico Votes existente no K
 Execute o Post escolhendo um valor na lista do endpoint. Quando clicar em executar ele enviará uma mensagem para o Broker Kafka que armazenará em um tópico. Nossa API de consumo esta com uma configuração para efetuar o consumo das informações enviadas a cada um segundo. Ou seja, a cada 1 segunda nossa API de consumo irá lá no tópico Kafka chamado `Votes` verificará se existem offsets não lidos. Caso houver ela pegará as informações contidas no offset lida naquele momento e a enviará para gravação no banco de dados do SQLServer. Caso haja sucesso na gravação, ele irá efetuar um `commit`naquele offset lido para que no próximo ciclo de consumo ele pegue uma nova informação. 
 Ao gravar na nossa tabela `Votes`no banco de dados, por ela estar sendo monitorada pelo CDC `Change-Data-Capture`, essas informações serão replicadas para a tabela `cdc.dbo_Votes_CT`, esses `logs` serão exportados para um outro tópico Kafka com nome `cdc.topic.ProjectVoteDb.dbo.Votes` que poderá ser lida por outra aplicação caso desejar.
 
+#### OBSERVAÇÃO:
+Caso tenha os arquivos binários do kafka em sua máquina, poderá criar kafka-console-consumer consumindo de `cdc.topic.ProjectVoteDb.dbo.Votes` somente para verificar a exportação dos dados do CDC para o tópico.
+
+Você também poderá verificar os dados gravados no banco. Basta acessar a API de consumo disponivel na url:
+
+    http://localhost:8001/swagger/index.html
+
+Lá existem dois endpoints , um para buscar todos os dados gravados no banco de dados, como também um endpoint para busca por ID.
+
 ## Em Desenvolvimento
 ---- LEITURA DO TÓPICO `cdc.topic.ProjectVoteDb.dbo.Votes`----
+
+## REFERÊNCIAS
+
+- https://learn.microsoft.com/pt-br/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16
+
+- https://www.confluent.io/lp/confluent-kafka/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.brand_tp.prs_tgt.confluent-brand_mt.xct_rgn.latam_lng.eng_dv.all_con.confluent-general&utm_term=confluent&creative=&device=c&placement=&gclid=Cj0KCQiA_bieBhDSARIsADU4zLcocjbsvv360VPtNDuKejHq2Bz5I6IaBfHcdVuPlDb8rySjfv513PwaAkSREALw_wcB
+
+- https://learn.microsoft.com/pt-br/azure/event-hubs/event-hubs-kafka-connect-debezium
+
+- https://debezium.io/
+
+- https://kafka.apache.org/
+
+- https://hub.docker.com/search?q=
