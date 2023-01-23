@@ -1,6 +1,6 @@
 ﻿using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
-using Project.Contracts.src;
+using Project.Models.src.Contracts;
 using Project.Models.src.Entities;
 using System.Text.Json;
 
@@ -18,6 +18,7 @@ namespace Kafka.src
             _kafkaOptions = kafkaOptions;
             _logger = logger;
         }
+
         protected IConsumer<string, string> GetClientKafka()
         {
             var clientConsumerConfig = new ConsumerConfig

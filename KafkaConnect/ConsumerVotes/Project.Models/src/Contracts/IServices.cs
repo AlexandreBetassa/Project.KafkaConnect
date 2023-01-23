@@ -1,4 +1,4 @@
-﻿namespace Project.Contracts.src
+﻿namespace Project.Models.src.Contracts
 {
     public interface IServices<T> where T : class
     {

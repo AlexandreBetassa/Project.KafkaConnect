@@ -4,12 +4,17 @@ services:
     image: confluentinc/cp-zookeeper:7.3.0
     hostname: zookeeper
     container_name: zookeeper
+    networks:
+      - netkafkaconnect
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+
   kafka:
     image: confluentinc/cp-kafka:7.3.0
     container_name: kafka
+    networks:
+      - netkafkaconnect
     ports:
       - "9092:9092"
     depends_on:
@@ -18,19 +23,22 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.142:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
   connect:
     image: connect-sqlserver
     container_name: kafka-connect
     depends_on:
       - kafka
+    networks:
+      - netkafkaconnect
     ports:
       - 8083:8083
     environment:
-      CONNECT_BOOTSTRAP_SERVERS: PLAINTEXT://10.0.0.142:9092
+      CONNECT_BOOTSTRAP_SERVERS: PLAINTEXT_INTERNAL://kafka:29092
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: cdc.connect-votes
       CONNECT_CONFIG_STORAGE_TOPIC: connect-1-config
@@ -43,16 +51,44 @@ services:
       CONNECT_OFFSET.STORAGE.PARTITIONS: 1
       CONNECT_STATUS.STORAGE.REPLICATION.FACTOR: 1
       CONNECT_STATUS.STORAGE.PARTITIONS: 1
-      CONNECT_REST_ADVERTISED_HOST_NAME: 10.0.0.142
+      CONNECT_REST_ADVERTISED_HOST_NAME: localhost
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "SqlServer2023"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    networks:
+      - netkafkaconnect
+    ports:
+      - "1433:1433"
+
   producer:
     image: producer-votes:latest
     container_name: producer
+    networks:
+      - netkafkaconnect
     ports:
       - 8000:80
     depends_on:
+      - sqlserver
       - kafka
+    links:
+      - "kafka"
+
   consumer:
     image: consumer-votes:latest
     container_name: consumer
+    networks:
+      - netkafkaconnect
+    depends_on:
+      - sqlserver
+      - kafka
     ports:
       - 8001:80
+
+networks:
+  netkafkaconnect:
+   driver: bridge

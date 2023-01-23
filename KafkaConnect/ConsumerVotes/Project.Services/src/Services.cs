@@ -1,4 +1,4 @@
-﻿using Project.Contracts.src;
+﻿using Project.Models.src.Contracts;
 
 namespace Project.Services.src
 {

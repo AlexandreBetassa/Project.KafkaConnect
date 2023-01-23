@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Project.Contracts\Project.Contracts.csproj" />
     <ProjectReference Include="..\Project.Infra\Project.Infra.csproj" />
     <ProjectReference Include="..\Project.Kafka\Project.Kafka.csproj" />
     <ProjectReference Include="..\Project.Models\Project.Models.csproj" />

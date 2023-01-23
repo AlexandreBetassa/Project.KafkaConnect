@@ -1,5 +1,5 @@
 ﻿using Confluent.Kafka;
-using Project.Contracts.src;
+using Project.Models.src.Contracts;
 using System.Text.Json.Serialization;
 
 namespace Project.Models.src.Entities

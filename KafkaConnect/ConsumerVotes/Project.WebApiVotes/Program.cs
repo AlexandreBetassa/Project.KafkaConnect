@@ -1,9 +1,9 @@
 using Kafka.src;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Project.Contracts.src;
 using Project.Infra.src.Context;
 using Project.Infra.src.Database;
+using Project.Models.src.Contracts;
 using Project.Models.src.Entities;
 using Project.Repository.src;
 using Project.Services.src;

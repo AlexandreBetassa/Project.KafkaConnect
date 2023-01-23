@@ -1,6 +1,4 @@
-﻿using Confluent.Kafka;
-
-namespace Project.Contracts.src
+﻿namespace Project.Models.src.Contracts
 {
     public interface IKafkaService
     {

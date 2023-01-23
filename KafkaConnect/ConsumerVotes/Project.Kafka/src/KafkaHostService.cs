@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Project.Contracts.src;
+using Project.Models.src.Contracts;
 
 namespace Kafka.src
 {
