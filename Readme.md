@@ -62,7 +62,7 @@ CREATE DATABASE ProjectVoteDb;
 CREATE TABLE dbo.Votes(
 	Id int IDENTITY(1,1) NOT NULL,
 	participants int NOT NULL,
-	Qtd int NOT NULL,
+	Qtd int NOT NULL)
 ```
 Com a tabela e o banco de dados criado podemos habilitar o CDC do seguinte modo:
 
@@ -82,3 +82,5 @@ Esse comando executará um procedimento armazenado no SQL Server que irá habili
 Esta query irá indicar para o CDC qual tabela capturar as alterações. Após alguns instantes, depois que a consulta for completada, examine se a sua estrutura ficou assim:
 
 ![TablesSql](./img/TablesSQL.png)
+
+## Plugin Debezium Sql-Server
