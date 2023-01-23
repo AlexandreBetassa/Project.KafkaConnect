@@ -2,13 +2,15 @@
 ## - EM DESENVOLVIMENTO
 
 Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
- - 1 Api de produtor de informações (Votos)
- - 1 Api de consumidor das informações geradas (Votos)
- - 1 Api KafkaConnect
- - 1 Serviço Kafka
- - 1 Serviço Zookeeper
- - 1 Serviço Debezium rodando com KafkaConnect para enxergar alterações no Banco de Dados (necessita do CDC habilitado no banco de dados)
- - 1 Serviço SQL Server 2022
+ - 1 Api de produtor de informações (Votos);
+ - 1 Api de consumidor das informações geradas (Votos);
+ - 1 Api KafkaConnect;
+ - 1 Serviço Kafka;
+ - 1 Serviço Zookeeper;
+ - 1 Serviço Debezium rodando com KafkaConnect para enxergar alterações no Banco de Dados (necessita do CDC habilitado no banco de dados);
+ - 1 Serviço SQL Server 2022;
+ - Engine Docker;
+ - WSL2.
 
  ## Como executá-lo
  ### Producer
@@ -64,7 +66,7 @@ CREATE TABLE dbo.Votes(
 	participants int NOT NULL,
 	Qtd int NOT NULL)
 ```
-Com a tabela e o banco de dados criado podemos habilitar o CDC do seguinte modo:
+- Com a tabela e o banco de dados criado podemos habilitar o CDC do seguinte modo:
 
 ```script
     EXEC sys.cdc_enable_db;
@@ -83,4 +85,18 @@ Esta query irá indicar para o CDC qual tabela capturar as alterações. Após a
 
 ![TablesSql](./img/TablesSQL.png)
 
+Com isso encerramos a configuração em nosso banco de dados.
+
 ## Plugin Debezium Sql-Server
+Para conectarmos o Debezium no nosso banco de dados, necessitamos criar o conector e enviá-lo para o kafka-connect. Para isso inicie um terminal do Ubuntu, navegue até a pasta onde esta armazenado o arquivo `debeziumsql.json`e execute o seguinte comando:
+
+    curl -X POST -H "Content-Type: application/json" --data @debeziumsql.json http://localhost:8083/connectors
+
+Este comando efetua um POST de um arquivo com extensão `.json`com as configurações básicas necessárias para o Debezium se conectar ao nosso banco de dados e exportar todas as configurações para um tópico Kafka chamado de: `cdc.topic.ProjectVoteDb.dbo.Votes`.
+
+## Envio de dados
+Abra seu navegador de internet e digite:
+
+    http://localhost:8000/swagger/index.html
+
+Abrirá o swagger para enviarmos dados para o nosso tópico Votes existente no Kafka. Não criamos ele manualmente, pois nossa API de Produção de dados já se encarrega de criar esse tópico para nós, com valores `default`com um tópico ou  `topic`com o nome de `votes`, uma partição ou `partitions`e também com o fator de replicação ou `replication-factor`da nossa mensagem pelo `broker`de um.
