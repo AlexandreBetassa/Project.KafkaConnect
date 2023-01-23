@@ -15,9 +15,14 @@ Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máqui
 
     https://github.com/codeedu/wsl2-docker-quickstart#integrar-docker-com-wsl-2
 
-Efetuado a instalação do serviço de container em sua máquina. Vá até a pasta "Producer" onde está o arquivo Produce.sln e execute o seguinte comando:
+Efetuado a instalação do serviço de container em sua máquina. Vá até a pasta `Producer` onde está o arquivo `Produce.sln` e execute o seguinte comando:
 
     docker build . -t producer-votes:latest
 
-Este comando fará com que uma imagem da API seja criada e assim possível de ser executada no quando subirmos o docker compose.
+Este comando fará com que uma imagem da API produtora de dados seja criada e assim possível de ser executada no quando subirmos o docker compose.
+### Consumer
+Vá até a pasta `Consumer` onde está localizado o arquivo `Votes.sln` e execute o seguinte comando:
 
+    docker build . -t consumer-votes:latest
+
+Este comando fará com que uma imagem da API consumidora de dados seja criada e assim possível de ser executada no quando subirmos o docker compose.
