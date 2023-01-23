@@ -116,6 +116,11 @@ Você também poderá verificar os dados gravados no banco. Basta acessar a API 
 
 Lá existem dois endpoints , um para buscar todos os dados gravados no banco de dados, como também um endpoint para busca por ID.
 
+
+### Fluxo das informações 
+
+![Fluxo](./img/fluxo.jpeg)
+
 ## Em Desenvolvimento
 ---- LEITURA DO TÓPICO `cdc.topic.ProjectVoteDb.dbo.Votes`----
 
