@@ -119,7 +119,7 @@ Lá existem dois endpoints , um para buscar todos os dados gravados no banco de 
 
 ### Fluxo das informações 
 
-![Fluxo](./img/fluxo.jpeg)
+![Fluxo](./img/fluxo.png)
 
 ## Em Desenvolvimento
 ---- LEITURA DO TÓPICO `cdc.topic.ProjectVoteDb.dbo.Votes`----
