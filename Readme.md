@@ -35,7 +35,7 @@ Abra um terminal, vá até a pasta `Docker`e execute o seguinte comando:
 
 Este comando criará uma imagem que criará uma imagem do KafkaConnect com um plugin do Debézium para mais tarde, monitorar o banco de dados das alterações efetuada na tabela que configurarmos.
 
-### Execução:
+### docker compose:
 Com os serviços configurados e as imagens criadas localmente, podemos então executar o docker compose. Ainda na pasta `Docker` e com o terminal aberto, execute o comando: 
 
     docker compose up -d
