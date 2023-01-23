@@ -45,14 +45,26 @@ Este comando fará com que todos os serviços necessários entrem e execução. 
 
 ## Habilitando CDC no Banco de Dados SQL Server:
 
-Como aqui o objetivo aqui é somente demonstrar uma maneira de colocar o projeto em execução, não explicaremos o que seria o CDC, porém vou colocar um link de documentação para consulta, logo abaixo:
+Como o objetivo aqui é somente demonstrar uma maneira de colocar o projeto em execução, não explicaremos o que seria o CDC, porém vou colocar um link de documentação para consulta, logo abaixo:
 
     https://learn.microsoft.com/pt-br/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16
 
-Para habilitá-lo você pode efetuar da seguinte maneira:
+Para habilitá-lo executaremos um passo a passo, desde a criação do banco de dados e da tabela:
 
 - Abra o SQL Server Management Studio, e digite as credenciais que estão na imagem abaixo: 
 
 ![SqlServerLogin](./img/loginsql.png)
 
+- Abra uma nova consulta e coloque o script abaixo:
+
+```script
+
+CREATE DATABASE ProjectVoteDb;
+CREATE TABLE dbo.Votes(
+	Id int IDENTITY(1,1) NOT NULL,
+	participants int NOT NULL,
+	Qtd int NOT NULL,
+)
+
+```
 
