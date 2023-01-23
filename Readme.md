@@ -10,7 +10,7 @@ Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Serviço SQL Server 2022
 
  ## Como executá-lo
-    Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máquina. Para mais detalhes consulte: 
+Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máquina. Para mais detalhes consulte: 
 
     https://github.com/codeedu/wsl2-docker-quickstart#integrar-docker-com-wsl-2
 
