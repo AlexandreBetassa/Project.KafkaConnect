@@ -10,6 +10,7 @@ Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Serviço SQL Server 2022
 
  ## Como executá-lo
+ ### Producer
 Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máquina. Para mais detalhes consulte: 
 
     https://github.com/codeedu/wsl2-docker-quickstart#integrar-docker-com-wsl-2
@@ -17,4 +18,6 @@ Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máqui
 Efetuado a instalação do serviço de container em sua máquina. Vá até a pasta "Producer" onde está o arquivo Produce.sln e execute o seguinte comando:
 
     docker build . -t producer-votes:latest
+
+Este comando fará com que uma imagem da API seja criada e assim possível de ser executada no quando subirmos o docker compose.
 
