@@ -6,13 +6,13 @@ using System.Text.Json;
 
 namespace Kafka.src
 {
-    public class KafkaService : IKafkaService
+    public class SubscribeService : ISubscribeService
     {
         private IServices<Vote> _svc;
         private readonly IKafkaOptions _kafkaOptions;
-        private ILogger<KafkaService> _logger;
+        private ILogger<SubscribeService> _logger;
 
-        public KafkaService(IServices<Vote> svc, IKafkaOptions kafkaOptions, ILogger<KafkaService> logger)
+        public SubscribeService(IServices<Vote> svc, IKafkaOptions kafkaOptions, ILogger<SubscribeService> logger)
         {
             _svc = svc;
             _kafkaOptions = kafkaOptions;
@@ -34,14 +34,14 @@ namespace Kafka.src
             return consumer;
         }
 
-        public async Task ListenerKafka(CancellationToken cancellation)
+        public async Task ListenerServer(CancellationToken cancellation)
         {
             var consumer = GetClientKafka();
             consumer.Subscribe(_kafkaOptions.Topic);
             while (!cancellation.IsCancellationRequested)
             {
                 var message = consumer.Consume(_kafkaOptions.TimeConsume);
-                _logger.LogInformation("Kafka consumed.");
+                _logger.LogInformation("Listening " + _kafkaOptions.Topic);
                 if (message != null)
                 {
                     var vote = JsonSerializer.Deserialize<Vote>(message.Message.Value);

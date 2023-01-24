@@ -21,8 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project.Infra\Project.Infra.csproj" />
-    <ProjectReference Include="..\Project.Kafka\Project.Kafka.csproj" />
-    <ProjectReference Include="..\Project.Models\Project.Models.csproj" />
+    <ProjectReference Include="..\Project.Models\Project.Contracts.csproj" />
     <ProjectReference Include="..\Project.Repository\Project.Repository.csproj" />
     <ProjectReference Include="..\Project.Services\Project.Services.csproj" />
   </ItemGroup>

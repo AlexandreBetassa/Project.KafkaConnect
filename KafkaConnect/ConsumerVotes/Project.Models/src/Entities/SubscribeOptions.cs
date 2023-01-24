@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Project.Models.src.Entities
 {
-    public class KafkaOptions : IKafkaOptions
+    public class SubscribeOptions : ISubscribeOptions
     {
         [JsonPropertyName("Topic")]
         public string Topic { get; set; }

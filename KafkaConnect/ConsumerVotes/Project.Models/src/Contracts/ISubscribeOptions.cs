@@ -2,7 +2,7 @@
 
 namespace Project.Models.src.Contracts
 {
-    public interface IKafkaOptions
+    public interface ISubscribeOptions
     {
         public string Topic { get; set; }
         public string BootstrapServer { get; set; }
