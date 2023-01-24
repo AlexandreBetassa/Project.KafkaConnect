@@ -5,19 +5,19 @@ namespace Project.Services.src
 {
     public class Services<T> : IServices<T> where T : class
     {
-        private readonly IKafkaService _kafkaSvc;
-        private readonly IKafkaOptions _kafkaOptions;
+        private readonly IPublisherService _publisherSvc;
+        private readonly IPublisherOptions _publisherOptions;
 
-        public Services(IKafkaService kafkaSvc, IKafkaOptions kafkaOptions)
+        public Services(IPublisherService kafkaSvc, IPublisherOptions publisherOptions)
         {
-            _kafkaSvc = kafkaSvc;
-            _kafkaOptions = kafkaOptions;
+            _publisherSvc = kafkaSvc;
+            _publisherOptions = publisherOptions;
         }
 
         public async Task Create(T entity)
         {
             string entityJson = JsonSerializer.Serialize(entity);
-            await _kafkaSvc.Send(_kafkaOptions.Topic, null, entityJson);
+            await _publisherSvc.Send(_publisherOptions.Topic, null, entityJson);
         }
     }
 }

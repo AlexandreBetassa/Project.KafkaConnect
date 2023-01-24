@@ -3,7 +3,7 @@ using Project.Contracts.src;
 
 namespace Project.Models.src.Entities
 {
-    public class KafkaOptions : IKafkaOptions
+    public class KafkaOptions : IPublisherOptions
     {
         public string Topic { get; set; }
         public string BootstrapServer { get; set; }

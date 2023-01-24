@@ -2,10 +2,10 @@
 
 namespace Project.Contracts.src
 {
-    public interface IKafkaService
+    public interface IPublisherService
     {
         public static IProducer<string, string>? Producer { get; set; }
         public Task Send(string topic, string key, string value);
-        public IProducer<string, string> GetClientKafka();
+        public IProducer<string, string> GetClientPublisher();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Project.Contracts.src
 {
-    public interface IKafkaOptions
+    public interface IPublisherOptions
     {
         public string Topic { get; set; }
         public string BootstrapServer { get; set; }

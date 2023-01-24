@@ -9,7 +9,6 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Project.WebApiVotes/Project.WebApiVotes.csproj", "Project.WebApiVotes/"]
 COPY ["Project.Infra/Project.Infra.csproj", "Project.Infra/"]
-COPY ["Project.Models/Project.Models.csproj", "Project.Models/"]
 COPY ["Project.Kafka/Project.Kafka.csproj", "Project.Kafka/"]
 COPY ["Project.Repository/Project.Repository.csproj", "Project.Repository/"]
 COPY ["Project.Services/Project.Services.csproj", "Project.Services/"]
