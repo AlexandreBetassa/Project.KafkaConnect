@@ -62,14 +62,15 @@ Para habilitá-lo executaremos um passo a passo, desde a criação do banco de d
 ```script
 CREATE DATABASE ProjectVoteDb;
 CREATE TABLE dbo.Votes(
-	Id int IDENTITY(1,1) NOT NULL,
-	participants int NOT NULL,
+	Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	Participants int NOT NULL,
 	Qtd int NOT NULL)
 ```
 - Com a tabela e o banco de dados criado podemos habilitar o CDC do seguinte modo:
 
 ```script
-    EXEC sys.cdc_enable_db;
+    USE ProjectVoteDb;
+    EXEC sys.sp_cdc_enable_db;
 ```
 Esse comando executará um procedimento armazenado no SQL Server que irá habilitar o CDC para nosso banco de dados, porém ainda precisaremos informar em qual tabela iremos efetuar as capturas. Para isso execute o seguinte script no Sql:
 
