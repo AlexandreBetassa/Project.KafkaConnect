@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project.Kafka\Project.Infra.csproj" />
-    <ProjectReference Include="..\Project.Services\Project.Services.csproj" />
   </ItemGroup>
 
 </Project>

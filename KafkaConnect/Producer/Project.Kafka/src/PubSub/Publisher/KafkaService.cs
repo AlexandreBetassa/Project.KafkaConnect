@@ -34,7 +34,7 @@ namespace Project.Infra.src.PubSub.Publisher
             try
             {
                 Producer = GetClientPublisher();
-                await Producer.ProduceAsync(topic, new Message<string, string> { Key = key, Value = value });
+                Producer.Produce(topic, new Message<string, string> { Key = key, Value = value });
                 Producer.Flush();
             }
             catch (Exception)

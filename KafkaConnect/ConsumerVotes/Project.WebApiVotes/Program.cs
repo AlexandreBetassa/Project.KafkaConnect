@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Project.Domain.src.Services;
 using Project.Infra.src.Context;
 using Project.Infra.src.Database;
 using Project.Infra.src.PubSub.Subscribe;
+using Project.Infra.src.Repository;
 using Project.Models.src.Contracts;
 using Project.Models.src.Entities;
-using Project.Repository.src;
-using Project.Services.src;
 
 var builder = WebApplication.CreateBuilder(args);
 

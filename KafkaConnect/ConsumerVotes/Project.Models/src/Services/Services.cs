@@ -1,6 +1,6 @@
 ﻿using Project.Models.src.Contracts;
 
-namespace Project.Services.src
+namespace Project.Domain.src.Services
 {
     public class Services<T> : IServices<T> where T : class
     {

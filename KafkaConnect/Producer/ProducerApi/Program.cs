@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Options;
 using Project.Contracts.src;
+using Project.Domain.src;
 using Project.Infra.src.PubSub.Publisher;
 using Project.Models.src.Entities;
-using Project.Services.src;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
