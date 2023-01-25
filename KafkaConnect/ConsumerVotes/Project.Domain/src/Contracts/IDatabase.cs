@@ -1,4 +1,4 @@
-﻿namespace Project.Models.src.Contracts
+﻿namespace Project.Domain.src.Contracts
 {
     public interface IDatabase<T> where T : class
     {

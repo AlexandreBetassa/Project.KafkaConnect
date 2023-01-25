@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.Models.src.Contracts;
-using Project.Models.src.Entities;
+using Project.Domain.src.Contracts;
+using Project.Domain.src.Entities;
 
 namespace Project.WebApiVotes.src.Controllers
 {

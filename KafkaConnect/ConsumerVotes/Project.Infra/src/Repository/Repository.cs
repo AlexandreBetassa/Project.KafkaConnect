@@ -1,4 +1,4 @@
-﻿using Project.Models.src.Contracts;
+﻿using Project.Domain.src.Contracts;
 
 namespace Project.Infra.src.Repository
 {

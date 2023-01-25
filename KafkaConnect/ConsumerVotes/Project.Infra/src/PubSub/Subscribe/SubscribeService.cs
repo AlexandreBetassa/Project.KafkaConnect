@@ -1,7 +1,7 @@
 ﻿using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
-using Project.Models.src.Contracts;
-using Project.Models.src.Entities;
+using Project.Domain.src.Contracts;
+using Project.Domain.src.Entities;
 using System.Text.Json;
 
 namespace Project.Infra.src.PubSub.Subscribe

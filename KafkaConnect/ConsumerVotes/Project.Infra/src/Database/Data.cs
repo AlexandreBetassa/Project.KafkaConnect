@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Project.Domain.src.Contracts;
 using Project.Infra.src.Context;
-using Project.Models.src.Contracts;
 
 namespace Project.Infra.src.Database
 {

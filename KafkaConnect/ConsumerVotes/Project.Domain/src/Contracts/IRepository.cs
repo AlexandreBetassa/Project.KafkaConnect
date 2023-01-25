@@ -1,6 +1,6 @@
-﻿namespace Project.Models.src.Contracts
+﻿namespace Project.Domain.src.Contracts
 {
-    public interface IServices<T> where T : class
+    public interface IRepository<T> where T : class
     {
         Task<T> Create(T entity);
         Task<T> GetOne(int id);

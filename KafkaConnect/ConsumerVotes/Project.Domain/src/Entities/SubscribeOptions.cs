@@ -1,8 +1,8 @@
 ﻿using Confluent.Kafka;
-using Project.Models.src.Contracts;
+using Project.Domain.src.Contracts;
 using System.Text.Json.Serialization;
 
-namespace Project.Models.src.Entities
+namespace Project.Domain.src.Entities
 {
     public class SubscribeOptions : ISubscribeOptions
     {

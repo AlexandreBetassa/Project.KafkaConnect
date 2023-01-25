@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Models.src.Entities;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Project.Domain.src.Entities;
 
 namespace Project.Infra.src.Context
 {

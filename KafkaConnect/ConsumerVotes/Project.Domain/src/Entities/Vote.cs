@@ -1,6 +1,6 @@
-﻿using Project.Models.src.Enum;
+﻿using Project.Domain.src.Enum;
 
-namespace Project.Models.src.Entities
+namespace Project.Domain.src.Entities
 {
     public class Vote
     {

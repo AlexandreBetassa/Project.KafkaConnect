@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Project.Models.src.Contracts;
+using Project.Domain.src.Contracts;
 
 namespace Project.Infra.src.PubSub.Subscribe
 {

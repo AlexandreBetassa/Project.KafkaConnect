@@ -1,4 +1,4 @@
-﻿namespace Project.Models.src.Enum
+﻿namespace Project.Domain.src.Enum
 {
     public enum Participants
     {
