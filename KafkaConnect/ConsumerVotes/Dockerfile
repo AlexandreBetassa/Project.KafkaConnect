@@ -7,20 +7,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Project.WebApiVotes/Project.WebApiVotes.csproj", "Project.WebApiVotes/"]
+COPY ["Project.WebApiConsumerVotes/Project.WebApiConsumerVotes.csproj", "Project.WebApiConsumerVotes/"]
 COPY ["Project.Infra/Project.Infra.csproj", "Project.Infra/"]
-COPY ["Project.Kafka/Project.Kafka.csproj", "Project.Kafka/"]
-COPY ["Project.Repository/Project.Repository.csproj", "Project.Repository/"]
-COPY ["Project.Services/Project.Services.csproj", "Project.Services/"]
-RUN dotnet restore "Project.WebApiVotes/Project.WebApiVotes.csproj"
+COPY ["Project.Domain/Project.Domain.csproj", "Project.Domain/"]
+RUN dotnet restore "Project.WebApiConsumerVotes/Project.WebApiConsumerVotes.csproj"
 COPY . .
-WORKDIR "/src/Project.WebApiVotes"
-RUN dotnet build "Project.WebApiVotes.csproj" -c Release -o /app/build
+WORKDIR "/src/Project.WebApiConsumerVotes"
+RUN dotnet build "Project.WebApiConsumerVotes.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Project.WebApiVotes.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Project.WebApiConsumerVotes.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Project.WebApiVotes.dll"]
+ENTRYPOINT ["dotnet", "Project.WebApiConsumerVotes.dll"]
