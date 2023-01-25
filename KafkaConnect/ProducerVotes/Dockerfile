@@ -7,18 +7,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Producer.sln", "ProducerApi/"]
-COPY ["ProducerApi/ProducerApi.csproj", "ProducerApi/"]
-RUN dotnet restore "ProducerApi/ProducerApi.csproj"
+COPY ["Project.WebApiProducerVotes/Project.WebApiProducerVotes.csproj", "Project.WebApiProducerVotes/"]
+COPY ["Project.Infra/Project.Infra.csproj", "Project.Infra/"]
+COPY ["Project.Domain/Project.Domain.csproj", "Project.Domain/"]
+RUN dotnet restore "Project.WebApiProducerVotes/Project.WebApiProducerVotes.csproj"
 COPY . .
-WORKDIR "/src/ProducerApi"
-RUN dotnet build "ProducerApi.csproj" -c Release -o /app/build
+WORKDIR "/src/Project.WebApiProducerVotes"
+RUN dotnet build "Project.WebApiProducerVotes.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ProducerApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Project.WebApiProducerVotes.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN apt update && apt install telnet -y
-ENTRYPOINT ["dotnet", "ProducerApi.dll"]
+ENTRYPOINT ["dotnet", "Project.WebApiProducerVotes.dll"]

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Infra", "Project.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Domain", "Project.Domain\Project.Domain.csproj", "{B7FDC467-F920-4706-93C4-265EC8C17090}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProducerApi", "Project.WebApiProducerVotes\ProducerApi.csproj", "{578D7536-67F3-4AF8-8079-0EFA1D5B4801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.WebApiProducerVotes", "Project.WebApiProducerVotes\Project.WebApiProducerVotes.csproj", "{B915E96C-2021-4F31-BEFC-AFF2770B9335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B7FDC467-F920-4706-93C4-265EC8C17090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7FDC467-F920-4706-93C4-265EC8C17090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7FDC467-F920-4706-93C4-265EC8C17090}.Release|Any CPU.Build.0 = Release|Any CPU
-		{578D7536-67F3-4AF8-8079-0EFA1D5B4801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{578D7536-67F3-4AF8-8079-0EFA1D5B4801}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{578D7536-67F3-4AF8-8079-0EFA1D5B4801}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{578D7536-67F3-4AF8-8079-0EFA1D5B4801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B915E96C-2021-4F31-BEFC-AFF2770B9335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B915E96C-2021-4F31-BEFC-AFF2770B9335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B915E96C-2021-4F31-BEFC-AFF2770B9335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B915E96C-2021-4F31-BEFC-AFF2770B9335}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
