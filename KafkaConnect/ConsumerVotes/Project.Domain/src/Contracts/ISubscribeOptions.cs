@@ -12,5 +12,7 @@ namespace Project.Domain.src.Contracts
         public bool ApiVersionRequest { get; set; }
         public AutoOffsetReset AutoOffsetResetApp { get; set; }
         public int TimeConsume { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

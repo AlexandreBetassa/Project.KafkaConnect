@@ -21,7 +21,7 @@ namespace Project.Infra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Project.Models.src.Entities.Vote", b =>
+            modelBuilder.Entity("Project.Domain.src.Entities.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,10 +29,10 @@ namespace Project.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Qtd")
+                    b.Property<int>("Participants")
                         .HasColumnType("int");
 
-                    b.Property<int>("participants")
+                    b.Property<int>("Qtd")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

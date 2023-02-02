@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-service-lb
+  namespace: k8s-votes-namespace
+spec:
+  selector:
+    app: producer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: LoadBalancer

@@ -21,5 +21,7 @@ namespace Project.Domain.src.Entities
         public AutoOffsetReset AutoOffsetResetApp { get; set; } = AutoOffsetReset.Earliest;
         [JsonPropertyName("TimeConsume")]
         public int TimeConsume { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

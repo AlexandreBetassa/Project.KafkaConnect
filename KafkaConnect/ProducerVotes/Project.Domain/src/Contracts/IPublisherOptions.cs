@@ -12,5 +12,7 @@ namespace Project.Domain.src.Contracts
         public bool EnableDeliveryReports { get; set; }
         public Acks AcksApp { get; }
         public SecurityProtocol Protocol { get; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

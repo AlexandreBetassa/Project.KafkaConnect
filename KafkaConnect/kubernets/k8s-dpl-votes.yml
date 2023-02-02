@@ -1,0 +1,120 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: k8s-votes-namespace
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-service-lb
+  namespace: k8s-votes-namespace
+spec:
+  selector:
+    app: consumer
+  ports:
+   - port: 80
+     targetPort: 80
+     protocol: TCP
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-service-lb
+  namespace: k8s-votes-namespace
+spec:
+  selector:
+    app: producer
+  ports:
+   - port: 80
+     targetPort: 80
+     protocol: TCP
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votes-dpl-consumer
+  labels:
+    app: consumer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: betassaalexandre/consumer-votes:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "0.5"
+          limits:
+            memory: "150Mi"
+            cpu: "1"
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          terminationGracePeriodSeconds: 60
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votes-dpl-producer
+  labels:
+    app: producer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+      - name: producer
+        image: betassaalexandre/producer-votes:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "0.5"
+          limits:
+            memory: "150Mi"
+            cpu: "1"
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3

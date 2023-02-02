@@ -29,6 +29,10 @@ namespace Project.Infra.src.PubSub.Subscribe
                 EnableAutoCommit = _subscribeOptions.AutoCommit,
                 ClientId = _subscribeOptions.ClientId,
                 GroupId = _subscribeOptions.GroupId,
+                SecurityProtocol = SecurityProtocol.SaslSsl,
+                SaslMechanism = SaslMechanism.Plain,
+                SaslPassword = _subscribeOptions.Password,
+                SaslUsername = _subscribeOptions.Username
             };
             var consumer = new ConsumerBuilder<string, string>(clientConsumerConfig).Build();
             return consumer;

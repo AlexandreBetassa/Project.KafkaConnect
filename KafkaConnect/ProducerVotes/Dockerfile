@@ -7,6 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+COPY *.sln .
 COPY ["Project.WebApiProducerVotes/Project.WebApiProducerVotes.csproj", "Project.WebApiProducerVotes/"]
 COPY ["Project.Infra/Project.Infra.csproj", "Project.Infra/"]
 COPY ["Project.Domain/Project.Domain.csproj", "Project.Domain/"]

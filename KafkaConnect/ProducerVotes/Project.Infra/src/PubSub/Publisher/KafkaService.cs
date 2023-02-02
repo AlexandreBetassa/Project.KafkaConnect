@@ -19,12 +19,16 @@ namespace Project.Infra.src.PubSub.Publisher
             {
                 BootstrapServers = _publisherOptions.BootstrapServer,
                 ApiVersionRequest = _publisherOptions.ApiVersionRequest,
+                SaslUsername = _publisherOptions.Username,
+                SaslPassword = _publisherOptions.Password,
                 ClientId = _publisherOptions.ClientId,
-                Acks = _publisherOptions.AcksApp,
                 LingerMs = _publisherOptions.LingerMs,
                 EnableDeliveryReports = _publisherOptions.EnableDeliveryReports,
-                SecurityProtocol = _publisherOptions.Protocol,
+                SecurityProtocol = SecurityProtocol.SaslSsl,
+                Acks = Acks.All,
+                SaslMechanism = SaslMechanism.Plain,
             };
+
             var producer = new ProducerBuilder<string, string>(clientProducerConfig).Build();
             return producer;
         }
