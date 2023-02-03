@@ -12,7 +12,7 @@ Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - Engine Docker;
  - WSL2.
 
- ## Como executá-lo
+ ## Como executar
  ### Producer
 Primeiro de tudo será necessário possuir a Engine Docker rodando em sua máquina. Para mais detalhes consulte: 
 
