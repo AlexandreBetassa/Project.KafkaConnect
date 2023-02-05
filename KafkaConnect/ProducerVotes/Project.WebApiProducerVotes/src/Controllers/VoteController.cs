@@ -25,7 +25,7 @@ namespace ProducerApi.src.Controllers
         [HttpGet(Name = "Get")]
         public async Task<IActionResult> Get()
         {
-            return Ok(");
+            return Ok("ok ");
         }
     }
 }
