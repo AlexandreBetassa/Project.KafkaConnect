@@ -21,11 +21,5 @@ namespace ProducerApi.src.Controllers
             var vote = new Vote { Participants = participant };
             return _service.Create(vote).IsCompletedSuccessfully ? Ok("Send Success") : BadRequest("Error");
         }
-
-        [HttpGet(Name = "Get")]
-        public async Task<IActionResult> Get()
-        {
-            return Ok("");
-        }
     }
 }
