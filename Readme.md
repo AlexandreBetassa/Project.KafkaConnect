@@ -1,5 +1,4 @@
 # POC.KakfaConnect - .Net 7 
-### -- EM DESENVOLVIMENTO
 
 Este projeto é um estudo para se trabalhar com o KafkaConnect. Onde possui:
  - 1 Api de produtor de informações (Votos);
