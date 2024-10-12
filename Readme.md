@@ -121,9 +121,6 @@ Lá existem dois endpoints , um para buscar todos os dados gravados no banco de 
 
 ![Fluxo](./img/fluxo.png)
 
-## Em Desenvolvimento
----- LEITURA DO TÓPICO `cdc.topic.ProjectVoteDb.dbo.Votes`----
-
 ## REFERÊNCIAS
 
 - https://learn.microsoft.com/pt-br/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16
